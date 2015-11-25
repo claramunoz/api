@@ -1,0 +1,73 @@
+swagger: '2.0'
+info:
+  description: The registry API for SwaggerHub
+  version: '1.0'
+  title: SwaggerHub Registry API
+  contact:
+    name: SwaggerHub
+    url: 'http://swaggerhub.com'
+    email: info@swaggerhub.com
+host: api.swaggerhub.com
+schemes:
+  - https
+paths:
+  /version:
+    get:
+      operationId: listVersionsv2
+      summary: List API versions
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK 200
+          examples:
+            application/json: |-
+              {
+                  "versions": [
+                      {
+                          "status": "CURRENT",
+                          "updated": "2011-01-21T11:33:21Z",
+                          "id": "v2.0"
+                      },
+                      {
+                          "status": "EXPERIMENTAL",
+                          "updated": "2013-07-23T11:33:21Z",
+                          "id": "v3.0"
+                      }
+                  ]
+              }
+        '300':
+          description: OK 300
+          examples:
+            application/json: |-
+              {
+                  "versions": [
+                      {
+                          "status": "CURRENT",
+                          "updated": "2011-01-21T11:33:21Z",
+                          "id": "v2.0",
+                          "links": [
+                              {
+                                  "href": "http://127.0.0.1:8774/v2/",
+                                  "rel": "self"
+                              }
+                          ]
+                      },
+                      {
+                          "status": "EXPERIMENTAL",
+                          "updated": "2013-07-23T11:33:21Z",
+                          "id": "v3.0",
+                          "links": [
+                              {
+                                  "href": "http://127.0.0.1:8774/v3/",
+                                  "rel": "self"
+                              }
+                          ]
+                      }
+                  ]
+              }
+securityDefinitions:
+  TokenSecured:
+    type: apiKey
+    name: Authorization
+    in: header
